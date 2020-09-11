@@ -18,3 +18,18 @@ If a player attempts to move in a direction that is off the gameboard, the game 
 the player to move again. 
 
 Any space that has been visited by the player is populated with an 'x' and the current spot of the player is denoted by a '|'
+
+# hw01 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  8 | Etch-a-Sketch works
+|  2 | Code documented
+|  2 | Includes #!/usr/bin/env python3 and chmod +x
+|  2 | install.sh included if needed
+|  2 | Used hw01 directory
+|  2 | ReadMe.md included
+|  2 | Name in gitLearn and gitLearnFork
+| 20 | **Total**
+
+Code works.  Are you using numpy?
