@@ -10,7 +10,7 @@ leftButton = "P9_20"
 rightButton = "P9_14"
 
 # Setting up all LED outputs
-upLED = "P9_27"
+upLED = "P9_30"
 downLED = "P9_21"
 leftLED = "P9_17"
 rightLED = "P9_12"
@@ -46,6 +46,7 @@ while True:
         else:
             GPIO.output(upLED, GPIO.LOW)
         upNum+=1
+        print("up pressed")
         
         
     if GPIO.event_detected(downButton):
