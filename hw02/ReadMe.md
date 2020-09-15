@@ -31,7 +31,7 @@
 
 11. I was able to run at 5ms period
 
-###./python 
+### Using python 
 
 1. Min Voltage: -41.8mV
    Max Voltage: 3.24V
