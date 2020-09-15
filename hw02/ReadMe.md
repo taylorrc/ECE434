@@ -7,3 +7,13 @@
 2. Period: 246ms
 
 3. Not very close to 100ms at all--there is a 146ms difference between the two values.
+
+4. 
+
+5. 22.1% of CPU was used
+
+6. 
+| Period (s) | CPU Usage | Measured Period (s) |
+|---|---|---|
+| 0.1 | 22.1% | 0.246 |
+| 0.01 | 72.8% | 0.066 |
