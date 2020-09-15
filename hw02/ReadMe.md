@@ -85,3 +85,15 @@
 8. Very stable. Very little CPU Usage spike when I open vim
 
 11. I was able to run at 5ms period with somewhat significant distortion
+
+## Table of Fastest Toggle Speeds
+
+| Type | Fastest Period (s) |
+|---|---|
+|./togglegpio.sh | 0.005 |
+| python | 0.005 |
+| C | |
+| toggle1.py | 19.4uS |
+| toggle1.c | |
+| toggle2.py | 10.0uS |
+| toggle2.c | |
