@@ -8,7 +8,7 @@
 
 3. Not very close to 100ms at all--there is a 146ms difference between the two values.
 
-4. 
+4. The process used to toggle the pins is very innacurrate
 
 5. 22.1% of CPU was used
 
@@ -40,7 +40,8 @@
 
 3. Pretty close to 100ms
 
-4. 
+4. The process used to toggle the pins is somewhat innacurrate
+
 
 5. 4% of CPU
 
@@ -67,7 +68,7 @@
 
 3. Much faster than 100ms. The command I used was ./togglegpio 60 0.1
 
-4. 
+4. The process used to toggle the pins is very innacurrate
 
 5. 25% of CPU
 
