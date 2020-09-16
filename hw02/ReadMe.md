@@ -59,32 +59,32 @@
 
 11. I was able to run at 5ms period with somewhat significant distortion
 
-### Using C
-1. Min Voltage: -41.8mV
-   Max Voltage: 3.24V
+### Using C with lseek()
+1. Min Voltage: 0V
+   Max Voltage: 344mV
 
-2. Period: 101.2ms
+2. Period: 308uS
 
-3. Pretty close to 100ms
+3. Much faster than 100ms. The command I used was ./togglegpio 60 0.1
 
 4. 
 
-5. 4% of CPU
+5. 25% of CPU
 
 6. 
 | Period (s) | CPU Usage | Measured Period (s) |
 |---|---|---|
-|0.1| 4%| 0.101|
-|0.01| 18.1%| 0.011|
-|0.05| 4.8%| 0.0514|
-|0.075| 4.7%| 0.0766|
-|0.005| 28.7%| 0.0632|
+|0.1| 25.0%| 308uS|
+|0.01| 29.2%| 308uS|
+|0.05| 25.8%| 308uS|
+|0.075| 26.8%| 308uS|
+|0.005| 26.0%| 308uS|
 
 7. As I decrease the period, the measured toggle time becomes less and less stable
 
 8. Very stable. Very little CPU Usage spike when I open vim
 
-11. I was able to run at 5ms period with somewhat significant distortion
+11. I was able to run around 300uS period with somewhat significant distortion
 
 ## Table of Fastest Toggle Speeds
 
@@ -92,8 +92,8 @@
 |---|---|
 |./togglegpio.sh | 0.005 |
 | python | 0.005 |
-| C | |
+| C | 308uS |
 | toggle1.py | 19.4uS |
-| toggle1.c | |
+| toggle1.c | 4.78uS |
 | toggle2.py | 10.0uS |
-| toggle2.c | |
+| toggle2.c | 4.8uS |
