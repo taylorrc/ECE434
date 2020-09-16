@@ -34,7 +34,7 @@ GPIO.add_event_detect(exitButton, GPIO.RISING)
 
 # Printing the instructions
 print("Welcome to Etch-A-Sketch!")
-print("Commands to use:")
+print("Buttons to use: (in order on board)")
 print("1. Up--Move cursor up")
 print("2. Down--Move cursor down")
 print("3. Left--Move cursor left")
