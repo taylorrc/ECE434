@@ -3,14 +3,19 @@
 
 import numpy
 import Adafruit_BBIO.GPIO as GPIO
+import smbus
+import time
+
+bus = smbus.SMBus(2)  # Use i2c bus 1
+matrix = 0x70         # Use address 0x70
 
 # Setting up all button inputs
 upButton = "P9_42"
-downButton = "P9_23"
-leftButton = "P9_20"
-rightButton = "P9_14"
-shakeButton = "P9_16"
-exitButton = "P9_18"
+downButton = "P9_41"
+leftButton = "P9_26"
+rightButton = "P9_23"
+shakeButton = "P9_27"
+exitButton = "P9_30"
 
 # Adding event detection to each button
 GPIO.setup(upButton, GPIO.IN)
@@ -45,26 +50,34 @@ print("Have fun!")
 print(" ")
 
 # Reading Coordinates
-boardHeight = 1 + int(input("Height of Board? "))
-boardLength = 1 + int(input("Length of Board? "))
+# boardHeight = 1 + int(input("Height of Board? "))
+# boardLength = 1 + int(input("Length of Board? "))
+boardHeight = 8;
+boardLength = 8;
 
 # Generating the gameboard
-gameBoard = numpy.full((boardHeight, boardLength), ' ')
+gameBoard = numpy.full((boardHeight + 1, boardLength), ' ')
+lightBoard = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+    0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+]
 
 # Putting numbers on the top and left side of the board
-for i in range(boardLength):
-    gameBoard[0][i] = i
+# for i in range(boardLength):
+#     gameBoard[0][i] = i
 
-for i in range(boardHeight):
-    gameBoard[i][0] = i
+# for i in range(boardHeight):
+#     gameBoard[i][0] = i
 
 # Setting up the cursor
-cursorX = 1
+cursorX = 0
 cursorY = 1
 gameBoard[cursorY][cursorX] = '|'
+lightBoard[2*cursorX + 1] = (1 << (8-cursorY))
 
 # Printing the initial gameboard
 print(gameBoard)
+bus.write_i2c_block_data(matrix, 0, lightBoard)
+
 
 # Main game loop
 while(1):
@@ -79,13 +92,20 @@ while(1):
         
         # Moving cursor and printing
         else: 
+            
             gameBoard[cursorY][cursorX] = 'x'
+            lightBoard[2*cursorX + 1] = lightBoard[2*cursorX + 1] | (1 << (8-cursorY))
 
             cursorX+=1
             gameBoard[cursorY][cursorX] = '|'
+            # lightBoard[2*cursorX - 2] = (1 << (8-cursorY))
 
             print(gameBoard)
+            bus.write_i2c_block_data(matrix, 0, lightBoard)
             print("RIGHT")
+            
+            print("X: ", cursorX)
+            print("Y: ", cursorY)
 
 
     # Reading going Left
@@ -93,78 +113,111 @@ while(1):
 
 
         # Checking Boundaries
-        if(cursorX <= 1):
+        if(cursorX <= 0):
             print("Cannot go Left!")
         
         # Moving cursor and printing
         else: 
+
+            
             gameBoard[cursorY][cursorX] = 'x'
+            lightBoard[2*cursorX + 1] =lightBoard[2*cursorX + 1] | (1 << (8-cursorY))
+
 
             cursorX-=1
             gameBoard[cursorY][cursorX] = '|'
+            # lightBoard[2*cursorX - 2] = (1 << (8-cursorY))
 
             print(gameBoard)
+            bus.write_i2c_block_data(matrix, 0, lightBoard)
             print("LEFT")
+            
+            print("X: ", cursorX)
+            print("Y: ", cursorY)
 
 
     # Reading going Up
     if GPIO.event_detected(upButton):
 
         # Checking Boundaries
-        if(cursorY <= 1):
+        if(cursorY <= 0 + 1):
             print("Cannot go Up!")
         
         # Moving cursor and printing
         else: 
+
+            
             gameBoard[cursorY][cursorX] = 'x'
+            lightBoard[2*cursorX + 1] = lightBoard[2*cursorX + 1] | (1 << (8-cursorY))
 
             cursorY-=1
             gameBoard[cursorY][cursorX] = '|'
+            # lightBoard[2*cursorX - 2] = (1 << (8-cursorY))
 
             print(gameBoard)
+            bus.write_i2c_block_data(matrix, 0, lightBoard)
             print("UP")
+            
+            print("X: ", cursorX)
+            print("Y: ", cursorY)
 
 
     # Reading going Down
     if GPIO.event_detected(downButton):
 
         # Checking Boundaries
-        if(cursorY >= boardHeight - 1):
+        if(cursorY >= boardHeight - 1 + 1):
             print("Cannot go Down!")
         
         # Moving cursor and printing
         else: 
+
             gameBoard[cursorY][cursorX] = 'x'
+            lightBoard[2*cursorX + 1] = lightBoard[2*cursorX + 1] | (1 << (8-cursorY))
 
             cursorY+=1
             gameBoard[cursorY][cursorX] = '|'
+            # lightBoard[2*cursorX - 2] = (1 << (8-cursorY))
 
             print(gameBoard)
+            bus.write_i2c_block_data(matrix, 0, lightBoard)
             print("DOWN")
 
+            print("X: ", cursorX)
+            print("Y: ", cursorY)
 
     # Reading Shake 
     if GPIO.event_detected(shakeButton):
  
         # Nulling out all characters
         for i in range(boardLength):
-            for k in range(boardHeight):
+            for k in range(boardHeight + 1):
                 gameBoard[k][i] = ' '
 
         # Putting Numbers back on top and side
-        for i in range(boardLength):
-            gameBoard[0][i] = i
+        # for i in range(boardLength):
+        #     gameBoard[0][i] = i
 
-        for i in range(boardHeight):
-            gameBoard[i][0] = i
+        # for i in range(boardHeight):
+        #     gameBoard[i][0] = i
+            
+        
+        lightBoard = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+            0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+        ]
 
         # Putting back the cursor
-        cursorX = 1
+        cursorX = 0
         cursorY = 1
         gameBoard[cursorY][cursorX] = '|'
 
         # Printing gameboard
+        print("X: ", cursorX)
+        print("Y: ", cursorY)
+        
         print(gameBoard)
+        bus.write_i2c_block_data(matrix, 0, lightBoard)
+
         print("SHAKE")
 
     # Reading Exit Command
