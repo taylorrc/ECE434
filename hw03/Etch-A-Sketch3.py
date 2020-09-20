@@ -50,8 +50,6 @@ print("Have fun!")
 print(" ")
 
 # Reading Coordinates
-# boardHeight = 1 + int(input("Height of Board? "))
-# boardLength = 1 + int(input("Length of Board? "))
 boardHeight = 8;
 boardLength = 8;
 
@@ -61,14 +59,7 @@ lightBoard = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 ]
 
-# Putting numbers on the top and left side of the board
-# for i in range(boardLength):
-#     gameBoard[0][i] = i
-
-# for i in range(boardHeight):
-#     gameBoard[i][0] = i
-
-# Setting up the cursor
+# Setting up the cursor -- y starts at 1 to accommodate for led matrix
 cursorX = 0
 cursorY = 1
 gameBoard[cursorY][cursorX] = '|'
@@ -83,7 +74,7 @@ bus.write_i2c_block_data(matrix, 0, lightBoard)
 while(1):
     # All player moves are determined by button presses
     
-    # Reading going Right
+    # Reading going Right -- All other movement buttons follow same code structure
     if GPIO.event_detected(rightButton):
 
         # Checking Boundaries
@@ -93,19 +84,23 @@ while(1):
         # Moving cursor and printing
         else: 
             
+            # Marking out in red where the player has been previously
             gameBoard[cursorY][cursorX] = 'x'
             lightBoard[2*cursorX + 1] = lightBoard[2*cursorX + 1] | (1 << (8-cursorY))
 
+            # Moving the cursor
             cursorX+=1
             gameBoard[cursorY][cursorX] = '|'
+            
+            # Clearing all green from the board and setting the cursor
             for k in range(0, 16, 2):
                 lightBoard[k] = 0x00
             lightBoard[2*cursorX] = (1 << (8-cursorY))
-
-            print(gameBoard)
+            
+            
+            # Printing the gameboard
             bus.write_i2c_block_data(matrix, 0, lightBoard)
             print("RIGHT")
-            
             print("X: ", cursorX)
             print("Y: ", cursorY)
 
@@ -120,19 +115,15 @@ while(1):
         
         # Moving cursor and printing
         else: 
-
             
             gameBoard[cursorY][cursorX] = 'x'
             lightBoard[2*cursorX + 1] =lightBoard[2*cursorX + 1] | (1 << (8-cursorY))
 
-
             cursorX-=1
             gameBoard[cursorY][cursorX] = '|'
-            # lightBoard[2*cursorX - 2] = (1 << (8-cursorY))
             for k in range(0, 16, 2):
                 lightBoard[k] = 0x00
             lightBoard[2*cursorX] = (1 << (8-cursorY))
-
 
             print(gameBoard)
             bus.write_i2c_block_data(matrix, 0, lightBoard)
@@ -152,19 +143,15 @@ while(1):
         # Moving cursor and printing
         else: 
 
-            
             gameBoard[cursorY][cursorX] = 'x'
             lightBoard[2*cursorX + 1] = lightBoard[2*cursorX + 1] | (1 << (8-cursorY))
 
             cursorY-=1
             gameBoard[cursorY][cursorX] = '|'
-            # lightBoard[2*cursorX - 2] = (1 << (8-cursorY))
             for k in range(0, 16, 2):
                 lightBoard[k] = 0x00
             lightBoard[2*cursorX] = (1 << (8-cursorY))
 
-
-            print(gameBoard)
             bus.write_i2c_block_data(matrix, 0, lightBoard)
             print("UP")
             
@@ -190,10 +177,7 @@ while(1):
             for k in range(0, 16, 2):
                 lightBoard[k] = 0x00
             lightBoard[2*cursorX] = (1 << (8-cursorY))
-            # lightBoard[2*cursorX - 2] = (1 << (8-cursorY))
-            
 
-            print(gameBoard)
             bus.write_i2c_block_data(matrix, 0, lightBoard)
             print("DOWN")
 
@@ -207,14 +191,6 @@ while(1):
         for i in range(boardLength):
             for k in range(boardHeight + 1):
                 gameBoard[k][i] = ' '
-
-        # Putting Numbers back on top and side
-        # for i in range(boardLength):
-        #     gameBoard[0][i] = i
-
-        # for i in range(boardHeight):
-        #     gameBoard[i][0] = i
-            
         
         lightBoard = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
             0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
@@ -229,8 +205,6 @@ while(1):
         # Printing gameboard
         print("X: ", cursorX)
         print("Y: ", cursorY)
-        
-        print(gameBoard)
         bus.write_i2c_block_data(matrix, 0, lightBoard)
 
         print("SHAKE")
