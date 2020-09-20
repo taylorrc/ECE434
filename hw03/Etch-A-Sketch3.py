@@ -72,7 +72,7 @@ lightBoard = [0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 cursorX = 0
 cursorY = 1
 gameBoard[cursorY][cursorX] = '|'
-lightBoard[2*cursorX + 1] = (1 << (8-cursorY))
+lightBoard[2*cursorX] = (1 << (8-cursorY))
 
 # Printing the initial gameboard
 print(gameBoard)
@@ -98,7 +98,9 @@ while(1):
 
             cursorX+=1
             gameBoard[cursorY][cursorX] = '|'
-            # lightBoard[2*cursorX - 2] = (1 << (8-cursorY))
+            for k in range(0, 16, 2):
+                lightBoard[k] = 0x00
+            lightBoard[2*cursorX] = (1 << (8-cursorY))
 
             print(gameBoard)
             bus.write_i2c_block_data(matrix, 0, lightBoard)
@@ -127,6 +129,10 @@ while(1):
             cursorX-=1
             gameBoard[cursorY][cursorX] = '|'
             # lightBoard[2*cursorX - 2] = (1 << (8-cursorY))
+            for k in range(0, 16, 2):
+                lightBoard[k] = 0x00
+            lightBoard[2*cursorX] = (1 << (8-cursorY))
+
 
             print(gameBoard)
             bus.write_i2c_block_data(matrix, 0, lightBoard)
@@ -153,6 +159,10 @@ while(1):
             cursorY-=1
             gameBoard[cursorY][cursorX] = '|'
             # lightBoard[2*cursorX - 2] = (1 << (8-cursorY))
+            for k in range(0, 16, 2):
+                lightBoard[k] = 0x00
+            lightBoard[2*cursorX] = (1 << (8-cursorY))
+
 
             print(gameBoard)
             bus.write_i2c_block_data(matrix, 0, lightBoard)
@@ -177,7 +187,11 @@ while(1):
 
             cursorY+=1
             gameBoard[cursorY][cursorX] = '|'
+            for k in range(0, 16, 2):
+                lightBoard[k] = 0x00
+            lightBoard[2*cursorX] = (1 << (8-cursorY))
             # lightBoard[2*cursorX - 2] = (1 << (8-cursorY))
+            
 
             print(gameBoard)
             bus.write_i2c_block_data(matrix, 0, lightBoard)
@@ -210,6 +224,7 @@ while(1):
         cursorX = 0
         cursorY = 1
         gameBoard[cursorY][cursorX] = '|'
+        lightBoard[2*cursorX] = (1 << (8-cursorY))
 
         # Printing gameboard
         print("X: ", cursorX)
