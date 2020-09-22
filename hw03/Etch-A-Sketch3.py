@@ -9,6 +9,10 @@ import time
 bus = smbus.SMBus(2)  # Use i2c bus 1
 matrix = 0x70         # Use address 0x70
 
+bus.write_byte_data(matrix, 0x21, 0)   # Start oscillator (p10)
+bus.write_byte_data(matrix, 0x81, 0)   # Disp on, blink off (p11)
+bus.write_byte_data(matrix, 0xe7, 0)   # Full brightness (page 15)
+
 # Setting up all button inputs
 upButton = "P9_42"
 downButton = "P9_41"
@@ -125,7 +129,6 @@ while(1):
                 lightBoard[k] = 0x00
             lightBoard[2*cursorX] = (1 << (8-cursorY))
 
-            print(gameBoard)
             bus.write_i2c_block_data(matrix, 0, lightBoard)
             print("LEFT")
             
