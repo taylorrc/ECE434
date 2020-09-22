@@ -3,37 +3,30 @@
 
 import numpy
 import Adafruit_BBIO.GPIO as GPIO
+from Adafruit_BBIO.Encoder import RotaryEncoder, eQEP1, eQEP2
 import smbus
 import time
 
 bus = smbus.SMBus(2)  # Use i2c bus 1
 matrix = 0x70         # Use address 0x70
 
+# Setting up both encoders
+rlEncoder = RotaryEncoder(eQEP1)
+rlEncoder.setAbsolute()
+
+udEncoder = RotaryEncoder(eQEP2)
+udEncoder.setAbsolute()
+
+# Configuring 8x8 Matrix
 bus.write_byte_data(matrix, 0x21, 0)   # Start oscillator (p10)
 bus.write_byte_data(matrix, 0x81, 0)   # Disp on, blink off (p11)
 bus.write_byte_data(matrix, 0xe7, 0)   # Full brightness (page 15)
 
 # Setting up all button inputs
-upButton = "P9_42"
-downButton = "P9_41"
-leftButton = "P9_26"
-rightButton = "P9_23"
 shakeButton = "P9_27"
 exitButton = "P9_30"
 
 # Adding event detection to each button
-GPIO.setup(upButton, GPIO.IN)
-GPIO.add_event_detect(upButton, GPIO.RISING)
-
-GPIO.setup(downButton, GPIO.IN)
-GPIO.add_event_detect(downButton, GPIO.RISING)
-
-GPIO.setup(leftButton, GPIO.IN)
-GPIO.add_event_detect(leftButton, GPIO.RISING)
-
-GPIO.setup(rightButton, GPIO.IN)
-GPIO.add_event_detect(rightButton, GPIO.RISING)
-
 GPIO.setup(shakeButton, GPIO.IN)
 GPIO.add_event_detect(shakeButton, GPIO.RISING)
 
@@ -43,13 +36,6 @@ GPIO.add_event_detect(exitButton, GPIO.RISING)
 
 # Printing the instructions
 print("Welcome to Etch-A-Sketch!")
-print("Commands to use:")
-print("1. Up--Move cursor up")
-print("2. Down--Move cursor down")
-print("3. Left--Move cursor left")
-print("4. Right--Move cursor right")
-print("5. Shake--clear the gameboard")
-print("6. Exit--exit the game")
 print("Have fun!")
 print(" ")
 
@@ -73,13 +59,18 @@ lightBoard[2*cursorX] = (1 << (8-cursorY))
 print(gameBoard)
 bus.write_i2c_block_data(matrix, 0, lightBoard)
 
+# Setting the initial positions of the encoders
+rlold_pos = rlEncoder.position
+udold_pos = udEncoder.position
 
 # Main game loop
 while(1):
-    # All player moves are determined by button presses
+    # All player moves are determined by rotary encoders
+    rlcur_pos = rlEncoder.position
+    udcur_pos = udEncoder.position
     
     # Reading going Right -- All other movement buttons follow same code structure
-    if GPIO.event_detected(rightButton):
+    if rlcur_pos > rlold_pos:
 
         # Checking Boundaries
         if(cursorX >= boardLength - 1):
@@ -110,7 +101,7 @@ while(1):
 
 
     # Reading going Left
-    if GPIO.event_detected(leftButton):
+    if rlcur_pos < rlold_pos:
 
 
         # Checking Boundaries
@@ -137,7 +128,7 @@ while(1):
 
 
     # Reading going Up
-    if GPIO.event_detected(upButton):
+    if udcur_pos > udold_pos:
 
         # Checking Boundaries
         if(cursorY <= 0 + 1):
@@ -163,7 +154,7 @@ while(1):
 
 
     # Reading going Down
-    if GPIO.event_detected(downButton):
+    if udcur_pos < udold_pos:
 
         # Checking Boundaries
         if(cursorY >= boardHeight - 1 + 1):
@@ -216,5 +207,12 @@ while(1):
     if GPIO.event_detected(exitButton):
         print("Exiting...")
         break
+    
+    # Setting old values as current values
+    rlold_pos = rlcur_pos
+    udold_pos = udcur_pos
+    
+    # Sleeping to avoid erraneous behavior
+    time.sleep(0.1)
 
 
