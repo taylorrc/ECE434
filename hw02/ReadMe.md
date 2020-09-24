@@ -1,3 +1,19 @@
+# hw02 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  2 | Buttons and LEDs 
+|  7 | Etch-a-Sketch works
+|    | Measuring a gpio pin on an Oscilloscope 
+|  4 | Questions answered
+|  2 | Table complete
+|  2 | gpiod
+|    | Security      *Missing*
+|  0 | ssh port
+|  0 | iptables
+|  0 | fail2ban
+| 17 | **Total**
+
 # ReadMe for Homework 2
 ## Measuring a gpio pin on an Oscilloscope
 ### Using ./togglegpio.sh
@@ -94,7 +110,7 @@
 |./togglegpio.sh | 0.005 |
 | python | 0.005 |
 | C | 308uS |
-| toggle1.py | 19.4uS |
+| toggle1.py | 19.4uS |  *Are you sure toggle-2 is faster than toggle1?*
 | toggle1.c | 4.78uS |
 | toggle2.py | 10.0uS |
 | toggle2.c | 4.8uS |
