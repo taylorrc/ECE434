@@ -1,3 +1,17 @@
+# hw03 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  5 | TMP101 
+|  3 |   | setup.sh
+|  2 |   | Documentation
+|  5 | Etch-a-Sketch
+|  3 |   | setup.sh
+|  2 |   | Documentation
+| 20 | **Total**
+
+*My comments are in italics. --may*
+
 # ECE434 Homework 3
 # Ryan Taylor
 
