@@ -1,3 +1,19 @@
+# hw04 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  2 | Memory map 
+|  4 | mmap()
+|  4 | i2c via Kernel
+|  4 | Etch-a-Sketch via flask
+|  4 | LCD display
+|  1 | Extras
+| 19 | **Total**
+
+*My comments are in italics. --may*
+
+*looks good.  Nice set of pictures.*
+
 # ECE434 HW04 
 # Ryan Taylor
 
@@ -10,6 +26,8 @@ I created a memory map diagram for the beaglebone and submitted it as a .pdf cal
 
 GPIO with mmap using python: 11.9uS period without any sleeps
 This is faster than toggling in python as we did in homework 2, but not faster than the fastest toggle time written in c. I would be curious to see if an mmap file written in c would have better toggle speeds.
+
+*I think it is*
 
 ## I2C via the Kernel Driver
 1. I made a shell script called "i2cTempRead.sh" which follows some of the same commands used in the example document. The temperature of the TMP101 sensor is output in milli-degrees celcius. 
