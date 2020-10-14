@@ -6,9 +6,9 @@
 |  2 | Makefile
 |  4 | Kernel Source
 |  2 | Cross-Compiling
-|  8 | Kernel Modules: hello, ebbchar, gpio_test, led
+|  6 | Kernel Modules: hello, ebbchar, gpio_test, led *led not done*
 |  0 | Extras
-| 18 | **Total**
+| 16 | **Total**
 
 *My comments are in italics. --may*
 
