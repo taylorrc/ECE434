@@ -1,3 +1,17 @@
+# hw05 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  2 | Project - *LED wreath sounds interesting*
+|  2 | Makefile
+|  4 | Kernel Source
+|  2 | Cross-Compiling
+|  6 | Kernel Modules: hello, ebbchar, gpio_test, led *led not done*
+|  0 | Extras
+| 16 | **Total**
+
+*My comments are in italics. --may*
+
 # ReadMe for hw05
 ## Ryan Taylor
 
