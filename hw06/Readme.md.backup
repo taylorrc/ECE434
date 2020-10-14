@@ -23,4 +23,13 @@ Scheduling: Time for the CPU to execute the high-priority task that is scheduled
 
 10. The lower priority interrupt is being handled. The higher priority IRQ can only begin when the lower priority event has finished. 
 
-11. The lower priority IRQ is interrupted and external events can begin to execute. 
+11. The lower priority IRQ is interrupted and external events can begin to execute. The lower priority IRQ can begin after this is finished. 
+
+### PREEMPT_RT
+Plots for loaded and unloaded kernel and RT-kernel are included in my repository as "cyclictestNoLoad.png" and "cyclictestWithLoad.png". The RT kernel has a bounded latency, which is clear to see between the differences with loaded and unloaded. The two curves for the RT kernel look practically the same. As for the non-RT kernel, the loaded latency was far greater than unloaded. 
+
+I used the suggested load from the PREEMPT_RT Module:
+
+bone$ **cd ~/exercises/linux/modules** <br />
+bone$ **make** <br />
+bone$ **make clean** <br />
