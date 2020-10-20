@@ -1,0 +1,9 @@
+# Homework 7 
+## Ryan Taylor
+
+### Project
+
+### Blynk
+I was able to install Blynk on both my phone and the Bone and run a simple example. Eventually, I was able to create a python program called tmp101.py that reads the temperature of a tmp101 sensor from my beagleboard and display the temperature in degrees F on the Blynk app. </br>
+</br>
+I was also able to add functionality of Blynk to my Etch-a-sketch program. This can be seen in Etch-a-sketch7.py. 
