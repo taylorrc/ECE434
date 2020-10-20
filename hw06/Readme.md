@@ -1,3 +1,17 @@
+# hw06 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  2 | Project 
+|  5 | Questions
+|  4 | PREEMPT_RT
+|  0 | Plots to 500 us  *Only goes to 400 us*
+|  5 | Plots - Heavy/Light load
+|  2 | Extras
+| 18 | **Total**
+
+*My comments are in italics. --may*
+
 # Homework 6 Responses
 ## Ryan Taylor
 ### Julia Cartwright Video:
