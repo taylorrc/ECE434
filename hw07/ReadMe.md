@@ -2,6 +2,7 @@
 ## Ryan Taylor
 
 ### Project
+Emily and I put all of the necessary links on the eLinux page under "ECE434 Project Christmas Wreath"
 
 ### Blynk
 I was able to install Blynk on both my phone and the Bone and run a simple example. Eventually, I was able to create a python program called tmp101.py that reads the temperature of a tmp101 sensor from my beagleboard and display the temperature in degrees F on the Blynk app. </br>
