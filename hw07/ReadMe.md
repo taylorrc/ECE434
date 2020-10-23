@@ -1,3 +1,16 @@
+# hw07 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  2 | Project Template
+|  2 | | Names
+|  0 | | Executive Summary - *missing*
+| 10 | Blynk - TMP101
+|  4 | Blynk - Etch-a-sketch - extra
+| 18 | **Total**
+
+*My comments are in italics. --may*
+
 # Homework 7 
 ## Ryan Taylor
 
