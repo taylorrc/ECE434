@@ -7,7 +7,7 @@ See the eLinux page for Project: Christmas Wreath for updates on milestones. Cur
 Link to sheet:
 https://docs.google.com/spreadsheets/d/1_h8FKWMosc_5O7rmFbkHEpMCW4jzmdoM-wXb9xUYumk/edit#gid=0
 
-I included a screenshot of the sheet within the hw09Photos folder. The file I used for logging is called demo.py. The temperature is logged every 5 seconds in degrees Fahrenheit. 
+I included a screenshot of the sheet within the hw09Photos folder. The file I used for logging is called demo.py. The temperature is logged every 5 seconds in degrees Fah
 
 ## Thingspeak
 I included a screenshot of the sheet within the hw09Photos. The file I used for logging is called temp.py. The temperature is logged in degrees Celsius and is captured every 15 seconds. 
