@@ -1,7 +1,21 @@
+# hw09 grading
+
+| Points      | Description |
+| ----------- | ----------- |
+|  5 | Project Timeline
+| 10 | Logging to Sheets
+|  3 | Logging to ThingSpeak - optional
+|  2 | Extras
+| 20 | **Total**
+
+*My comments are in italics. --may*
+
 # ReadMe for Homework 9
 
 ## Project Status
-See the eLinux page for Project: Christmas Wreath for updates on milestones. Currently, we are trying to find a good way to start and stop playing music on a USB dongle connected to the bone through python
+See the eLinux page for Project: Christmas Wreath for updates on milestones. Currently, we are trying to find a good way to start and stop playing music on a USB dongle connected to the bone through python.
+
+*Looks like you made good progress on this Thursday.*
 
 ## Google Sheets:
 Link to sheet:
